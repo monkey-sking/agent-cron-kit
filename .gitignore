@@ -1,0 +1,37 @@
+# 凭据
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+credentials*
+cookies*.txt
+cookies*.json
+storage_state*.json
+
+# 运行产物
+outbox/
+logs/
+state/
+*.log
+*.db
+*.sqlite
+*.jsonl
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# 备份
+backups/
+*.bak
+*.bak_*
+*.tgz
+*.zip
+
+# 编辑器
+.vscode/
+.idea/

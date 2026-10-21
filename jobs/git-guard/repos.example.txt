@@ -1,0 +1,8 @@
+# 例：一行一个仓库绝对路径，`#` 之后是注释。
+# 这些仓库会被 git_autopush.sh 推送、git_push_watchdog.sh 巡检。
+#
+# 也可以用 CRON_KIT_GIT_ROOTS=~/dev/Projects 让它自动发现（最多 3 层）。
+# 不能自动推的仓库列到 $CRON_KIT_STATE_DIR/repos.skip（一行一个 glob，如 wechatsync）。
+
+# /Users/you/dev/Projects/my-app
+# /Users/you/dev/Projects/some-lib

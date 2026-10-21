@@ -1,0 +1,60 @@
+{
+  "_comment": "调度器任务清单示例（渠道 ID 已脱敏）。要点看三条：命令里的标题要加引号、静默任务靠空输出、失败必须非零退出。",
+  "jobs": [
+    {
+      "id": "github-trending",
+      "name": "GitHub Trending 日报",
+      "enabled": true,
+      "cron": "0 9 * * *",
+      "timeZone": "Asia/Shanghai",
+      "cwd": "__REPO__",
+      "command": "/usr/bin/python3 __REPO__/lib/deliver.py --target telegram --title '【GitHub Trending】' -- /bin/bash __REPO__/jobs/github-trending/run.sh",
+      "timeoutSeconds": 180,
+      "env": {
+        "TELEGRAM_CHAT_ID": "REPLACE_ME",
+        "CRON_KIT_STATE_DIR": "__HOME__/.local/state/cron-kit"
+      }
+    },
+    {
+      "id": "git-push-check",
+      "name": "Git 脏仓库巡检",
+      "enabled": true,
+      "cron": "30 18 * * *",
+      "timeZone": "Asia/Shanghai",
+      "cwd": "__HOME__/dev/Projects",
+      "command": "/usr/bin/python3 __REPO__/lib/deliver.py --target telegram --title '【Git push 检查】' -- /bin/bash __REPO__/jobs/git-guard/git_push_watchdog.sh",
+      "timeoutSeconds": 180,
+      "env": {
+        "TELEGRAM_CHAT_ID": "REPLACE_ME",
+        "CRON_KIT_GIT_ROOTS": "__HOME__/dev/Projects"
+      }
+    },
+    {
+      "id": "git-autopush",
+      "name": "Git 自动推送",
+      "enabled": true,
+      "cron": "0 20 * * *",
+      "timeZone": "Asia/Shanghai",
+      "cwd": "__HOME__/dev/Projects",
+      "command": "/usr/bin/python3 __REPO__/lib/deliver.py --target telegram --title '【Git 自动推送（每日）】' -- /bin/bash __REPO__/jobs/git-guard/git_autopush.sh",
+      "timeoutSeconds": 600,
+      "env": {
+        "TELEGRAM_CHAT_ID": "REPLACE_ME",
+        "CRON_KIT_GIT_ROOTS": "__HOME__/dev/Projects"
+      }
+    },
+    {
+      "id": "maintenance-cleanup",
+      "name": "维护清理（每周）",
+      "enabled": true,
+      "cron": "30 4 * * 0",
+      "timeZone": "Asia/Shanghai",
+      "cwd": "__REPO__",
+      "command": "/usr/bin/python3 __REPO__/lib/deliver.py --target telegram --title '【维护清理】' -- /bin/bash __REPO__/jobs/maintenance/maintenance_cleanup.sh",
+      "timeoutSeconds": 300,
+      "env": {
+        "AGENT_HOME": "__HOME__/.hermes"
+      }
+    }
+  ]
+}

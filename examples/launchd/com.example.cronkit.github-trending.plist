@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  模板：每天 09:00 跑 GitHub Trending 日报，输出非空时投递到 Telegram。
+  用法：
+    1. 把 __HOME__ / __REPO__ 换成你的真实路径；
+    2. cp 到 ~/Library/LaunchAgents/com.example.cronkit.github-trending.plist；
+    3. launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.example.cronkit.github-trending.plist
+
+  注意：
+    - launchd 的环境极简，PATH 里没有你用 shell 时的那些目录，解释器请写绝对路径；
+    - 命令参数含空格或全角括号必须用引号，否则会被拆成多个参数（踩过坑）。
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.example.cronkit.github-trending</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>__REPO__/lib/deliver.py</string>
+    <string>--target</string>
+    <string>telegram</string>
+    <string>--title</string>
+    <string>【GitHub Trending】</string>
+    <string>--</string>
+    <string>/bin/bash</string>
+    <string>__REPO__/jobs/github-trending/run.sh</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>__REPO__</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>CRON_KIT_STATE_DIR</key>
+    <string>__HOME__/.local/state/cron-kit</string>
+    <key>CRON_KIT_ENV_FILE</key>
+    <string>__HOME__/.config/cron-kit/.env</string>
+  </dict>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>__HOME__/.local/state/cron-kit/launchd.github-trending.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HOME__/.local/state/cron-kit/launchd.github-trending.err.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>
