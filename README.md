@@ -1,5 +1,9 @@
 # agent-cron-kit
 
+<!-- badges:start -->
+[![License](https://img.shields.io/github/license/monkey-sking/agent-cron-kit?style=flat-square)](https://github.com/monkey-sking/agent-cron-kit/blob/main/LICENSE) [![Last commit](https://img.shields.io/github/last-commit/monkey-sking/agent-cron-kit?style=flat-square)](https://github.com/monkey-sking/agent-cron-kit/commits/main) [![Python](https://img.shields.io/github/languages/top/monkey-sking/agent-cron-kit?style=flat-square)](https://github.com/monkey-sking/agent-cron-kit/search?l=Python) [![views](https://hits.sh/github.com/monkey-sking/agent-cron-kit.svg?style=flat-square&label=views&color=0e75b6)](https://github.com/monkey-sking/agent-cron-kit)
+<!-- badges:end -->
+
 把一个人机器上跑了一年的定时脚本拆开来看：**哪些能公开，哪些只能留在自己机器上。**
 
 这不是「把 dotfiles 传上来」，而是一次公开前的分拣。仓库里只放分拣后**确认可以公开**的部分；
